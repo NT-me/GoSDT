@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 
 def create_doc(project_root, lst_FSC):
@@ -12,7 +13,12 @@ def create_doc(project_root, lst_FSC):
 
         P = P.replace(".py", ".md")
 
-        fichier = open(P, 'w')
+        try:
+            fichier = open(P, 'w')
+        except FileNotFoundError:
+            pathinfo = pathlib.Path(file.path)
+            os.makedirs(pathlib.Path(P).parent)
+            fichier = open(P, 'w')
 
         ecriture = "# "+file.name.replace(".py", "") + " \n"
 
@@ -24,4 +30,4 @@ def create_doc(project_root, lst_FSC):
         for fun in file.lstFunc:
             ecriture += "## "+fun+"\n\n"
 
-        fichier.write(ecriture)
+            fichier.write(ecriture)
