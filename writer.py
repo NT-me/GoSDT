@@ -13,21 +13,21 @@ def create_doc(project_root, lst_FSC):
 
         P = P.replace(".py", ".md")
 
-        try:
-            fichier = open(P, 'w')
-        except FileNotFoundError:
-            pathinfo = pathlib.Path(file.path)
-            os.makedirs(pathlib.Path(P).parent)
-            fichier = open(P, 'w')
+        if os.path.isfile(P) is False:
+            try:
+                    fichier = open(P, 'w')
+            except FileNotFoundError:
+                os.makedirs(pathlib.Path(P).parent)
+                fichier = open(P, 'w')
 
-        ecriture = "# "+file.name.replace(".py", "") + " \n"
+            ecriture = "# "+file.name.replace(".py", "") + " \n"
 
-        for cl in file.lstClassO:
-            ecriture += "## "+cl.name+"\n\n"
-            for met in cl.lstMeth:
-                ecriture += "### "+met+"\n\n"
+            for cl in file.lstClassO:
+                ecriture += "## "+cl.name+"\n\n"
+                for met in cl.lstMeth:
+                    ecriture += "### "+met+"\n\n"
 
-        for fun in file.lstFunc:
-            ecriture += "## "+fun+"\n\n"
+            for fun in file.lstFunc:
+                ecriture += "## "+fun+"\n\n"
 
-            fichier.write(ecriture)
+                fichier.write(ecriture)
