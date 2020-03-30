@@ -30,4 +30,4 @@ def create_doc(project_root, lst_FSC):
             for fun in file.lstFunc:
                 ecriture += "## "+fun+"\n\n"
 
-                fichier.write(ecriture)
+            fichier.write(ecriture)
